@@ -6,8 +6,8 @@ mapboxgl.accessToken =
   'pk.eyJ1IjoiZmxvcmVudGxlbSIsImEiOiJja2hveDNuYzcxNWY5MndteDM2djE3NnlxIn0.UuP-JCIEimNyvaSefaRr9A';
 
 class Map extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       lat: 47.941807,
       lng: 2.003303,
@@ -17,6 +17,14 @@ class Map extends Component {
   }
 
   componentDidMount() {
+    
+    // console.log( this.props.markers .filter((item) => {return item.type !== undefined}));
+  };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.markers.length === prevProps.markers.length) {
+      return;
+    }
     const { setSelectedMarker } = this.props;
     const map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -28,6 +36,8 @@ class Map extends Component {
 
     this.props.markers
       // .filter(el => el.zipcode % 1000 === 0)
+      .filter(el => Math.floor(el.zipcode / 1000) === 42)
+      .filter((item) => (item.type !== undefined))
       .map((point, index) => {
         let marker = document.createElement('div');
         marker.className = 'markerMap';
@@ -44,6 +54,7 @@ class Map extends Component {
           .setLngLat([point.longitude, point.latitude])
           .addTo(map);
       });
+      console.log("finish")
   }
   render() {
     const { selectedMarker, closedLocation } = this.props;

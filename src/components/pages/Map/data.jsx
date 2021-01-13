@@ -4,8 +4,8 @@ import axios from 'axios';
 import Map from './Map';
 
 class Data extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       selectedMarker: null,
       markers: []
