@@ -10,7 +10,7 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            <SelectedMarker role={true} />
+            <SelectedMarker role={false} />
           </Route>
         </Switch>
       </Router>
