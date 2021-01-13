@@ -1,0 +1,22 @@
+.header {
+  &__container {
+    width: 100%;
+    height: 70px;
+    background-color: #5a9449;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    -webkit-box-shadow: 8px 9px 32px -3px rgba(0, 0, 0, 0.29);
+    -moz-box-shadow: 8px 9px 32px -3px rgba(0, 0, 0, 0.29);
+    box-shadow: 8px 9px 32px -3px rgba(0, 0, 0, 0.29);
+  }
+
+  &__logo {
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 450px;
+    height: 50px;
+    margin: 0 0 0 15px;
+  }
+}
