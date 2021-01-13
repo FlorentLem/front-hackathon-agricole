@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from "./components/pages/Home/Home";
-import Header from "./components/elements/Header/Header"
+// import Home from "./components/pages/Home/Home";
+import Header from "./components/elements/Header/Header";
+import SelectedMarker from "./components/elements/SelectedMarker/SelectedMarker";
 
 const App = () => {
   return (
@@ -8,7 +9,9 @@ const App = () => {
       <Header />
       <Router>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/">
+            <SelectedMarker role={true} />
+          </Route>
         </Switch>
       </Router>
     </>
