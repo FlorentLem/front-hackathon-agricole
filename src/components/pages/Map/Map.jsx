@@ -18,39 +18,39 @@ class Map extends Component {
 
   componentDidMount() {
     const { setSelectedMarker } = this.props;
-
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/florentlem/ckjvfba3q07a517parv0h15ln',
       center: [this.state.lng, this.state.lat],
-      zoom: this.state.zoom
+      zoom: this.state.zoom,
+      attributionControl: false
     });
 
-    this.props.markers.map((point, index) => {
-      let marker = document.createElement('div');
-      marker.className = 'markerMap';
-      marker.addEventListener('click', function() {
-        map.flyTo({
-          center: point.position,
-          zoom: 7.5,
-          speed: 1
+    this.props.markers
+      // .filter(el => el.zipcode % 1000 === 0)
+      .map((point, index) => {
+        let marker = document.createElement('div');
+        marker.className = 'markerMap';
+        marker.addEventListener('click', function() {
+          map.flyTo({
+            center: [point.longitude, point.latitude],
+            zoom: 7.5,
+            speed: 1
+          });
+          setSelectedMarker(index);
         });
-        setSelectedMarker(index);
+
+        new mapboxgl.Marker({ element: marker })
+          .setLngLat([point.longitude, point.latitude])
+          .addTo(map);
       });
-
-      new mapboxgl.Marker({ element: marker })
-        .setLngLat(point.position)
-        .addTo(map);
-    });
   }
-
   render() {
-    const { selectedMarker } = this.props;
-
+    const { selectedMarker, closedLocation } = this.props;
     return (
       <>
         {selectedMarker && (
-          <div className='cardSelect__globalContainer'>
+          <div>
             <h1>hello</h1>
           </div>
         )}

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Map from './components/pages/Map/Map';
+import Map from './components/pages/Map/data';
 import Header from './components/elements/Header/Header';
 
 const App = () => {
