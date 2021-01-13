@@ -1,10 +1,12 @@
 import React from "react";
 import "./Home.scss";
+import ProgressBar from "./ProgressBar";
 
 const Home = () => {
+    const pourcentage = 50
     return(
         <div>
-            <p className="homeText">Oui</p>
+            <ProgressBar done={pourcentage} />
         </div>
     );
 };
