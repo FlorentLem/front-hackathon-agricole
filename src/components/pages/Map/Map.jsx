@@ -37,7 +37,7 @@ class Map extends Component {
     this.props.markers
       // .filter(el => el.zipcode % 1000 === 0)
       .filter(el => Math.floor(el.zipcode / 1000) === 42)
-      .filter((item) => (item.type !== undefined))
+      .filter((item) => (item.type !== undefined)) 
       .map((point, index) => {
         let marker = document.createElement('div');
         marker.className = 'markerMap';
