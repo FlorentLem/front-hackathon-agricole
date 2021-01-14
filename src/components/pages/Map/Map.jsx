@@ -28,6 +28,7 @@ class Map extends Component {
       setSelectedMarker,
       setSelectedCapital,
       setMapGenetate,
+      filters,
     } = this.props;
     if (this.props.mapGenetate) {
       map = new mapboxgl.Map({
@@ -42,12 +43,22 @@ class Map extends Component {
         // aaa
       });
     }
-    if (this.props.dep !== prevProps.dep) {
+    if (this.props.dep !== prevProps.dep || filters !== prevProps.filters) {
       displayMarker.map((item) => {
         item.remove();
       });
+      console.log("object");
       this.props.drawMarker
         .filter((item) => item.type !== undefined)
+        .filter((item) => !(filters[0].checked && item.type.includes(filters[0].type.toLowerCase())))
+        .filter((item) => !(filters[1].checked && item.type.includes(filters[1].type.toLowerCase())))
+        .filter((item) => !(filters[2].checked && item.type.includes(filters[2].type.toLowerCase())))
+        .filter((item) => !(filters[3].checked && item.type.includes(filters[3].type.toLowerCase())))
+        .filter((item) => !(filters[4].checked && item.type.includes(filters[4].type.toLowerCase())))
+        .filter((item) => !(filters[5].checked && item.type.includes(filters[5].type.toLowerCase())))
+        .filter((item) => !(filters[6].checked && item.type.includes(filters[6].type.toLowerCase())))
+        .filter((item) => !(filters[7].checked && item.type.includes(filters[7].type.toLowerCase())))
+        .filter((item) => !(filters[8].checked && item.type.includes(filters[8].type.toLowerCase())))
         .map((point, index) => {
           const marker = document.createElement("div");
           marker.className = "markerMap";
@@ -95,7 +106,8 @@ class Map extends Component {
     }
   }
   render() {
-    const { selectedMarker, closedLocation } = this.props;
+    const { selectedMarker, closedLocation, filters } = this.props;
+    console.log(selectedMarker);
     return (
       <>
         {selectedMarker && (

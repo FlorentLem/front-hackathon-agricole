@@ -1,0 +1,109 @@
+//Primary colors
+$info: #337ab7;
+$warning: #f37f2b;
+$premium: #e9b537;
+$danger: #e4454d;
+$primary: #5a9449;
+
+//4 shade of grey 
+$black: #2a2a2a;
+$dark-grey: #565656;
+$medium-grey: #d6d6d6;
+$light-grey: #e8e8e8;
+
+//Font families
+$default-font-family: 'Open Sans', 'Lora', "Helvetica Neue", Helvetica, Arial, sans-serif;
+$header-font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+//Font weights 
+$bold: 700;
+$semi-bold: 600;
+$regular: 400;
+
+.full-box {
+    width: 100%;
+    border: 1px solid;
+}
+.avatar-bg {
+    background-image: url("./assets/fermier.svg");
+    background-color: $primary;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 150px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.avatar-acheteur {
+    background-image: url("./assets/agriculteur.svg");
+    background-color: $dark-grey;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 150px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+
+.box-info h2, .box-farmsize h2 {
+    color: $primary;
+    font-weight: bold;
+    font-size: 15px;
+}
+.box-farmsize p {
+    color: $primary;
+    font-size: 15px;
+}
+
+.box-header img, .box-header-ach img {
+    height: 45px;
+}
+
+.box-agriculteur, .box-céréales, .box-céréales-ach {
+    box-shadow: 0 0 1rem 0 rgb(0, 0, 0, 0.2);
+    border-radius: 20px;
+    margin: 20px;
+    padding: 20px;
+    background-color: transparent;
+    backdrop-filter: blur(2px);
+    display: flex;
+    flex-direction: column;
+}
+.box-info, .box-farmsize, .box-header, .box-header-ach {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+.box-agriculteur h1, .box-céréales h1 {
+    font-size: 20px;
+    color: $primary;
+}
+
+.box-header-ach h1 {
+    color: $dark-grey;
+}
+.type-acheteur p {
+    color: $dark-grey;
+    font-size: 15px;
+}
+.type-acheteur h2, p {
+    color: $dark-grey;
+    font-size: 20px;
+    padding: 5px;
+}
+.box-céréales-ach h1 {
+    color: $dark-grey;
+    font-size: 20px;
+}
+
+@media screen and (min-width: 769px) {
+    .avatar-bg, avatar-acheteur {
+        border-radius: 20px;
+        position: absolute;
+        width: 400px;
+    }
+
+
+}
