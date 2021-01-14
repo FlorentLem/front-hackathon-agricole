@@ -47,6 +47,7 @@ class Map extends Component {
             fitBoundsOptions:{maxZoom:8},
           })
         )
+        map.addControl(new mapboxgl.NavigationControl());
       setMapGenetate();
       map.on("load", function () {
         // aaa

@@ -38,7 +38,12 @@
   backdrop-filter: blur(2px);
 }
 
-.mapboxgl-ctrl {
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  float: inherit !important;
+}
+
+.mapboxgl-ctrl-geolocate {
+  float: inherit !important;
   margin-top: 80px !important;
 }
 
