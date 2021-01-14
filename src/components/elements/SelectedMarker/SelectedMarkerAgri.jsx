@@ -10,12 +10,43 @@ const SelectedMarkerAgri = ({ marker, closedLocation }) => {
   const [somme, setSomme] = useState("");
   const [transSomme, setTransSomme] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [isRated, setIsRated] = useState([{ name: "", valeur: 0, star: "" }]);
+
+  const rate = [
+    {
+      name: "Inscrit",
+      valeur: 0,
+      star: "☆☆☆☆",
+    },
+    {
+      name: "Novice",
+      valeur: 60,
+      star: "⭐️☆☆☆",
+    },
+    {
+      name: "Intermédiaire",
+      valeur: 120,
+      star: "⭐️⭐️☆☆",
+    },
+    {
+      name: "Confirmé",
+      valeur: 180,
+      star: "⭐️⭐️⭐️☆",
+    },
+    {
+      name: "Expert",
+      valeur: 240,
+      star: "⭐️⭐️⭐️⭐️",
+    },
+  ];
+
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/profil/${marker.object.id}`)
       .then((res) => res.data)
       .then((data) => {
         setAgriTab(data);
+        rating(data);
         setIsLoading(false);
         setSomme(data.profil.somme);
       })
@@ -23,6 +54,20 @@ const SelectedMarkerAgri = ({ marker, closedLocation }) => {
         console.log(err);
       });
   }, []);
+
+  const rating = (data) => {
+    console.log(agri);
+    for (let i = 0; i <= rate.length - 1; i++) {
+      if (data.profil.somme >= rate[i].valeur) {
+        setIsRated({
+          name: rate[i].name,
+          valeur: rate[i].valeur,
+          star: rate[i].star,
+        });
+      }
+    }
+  };
+
   return (
     <div className="selectedMarker__container">
       {/* {console.log(agriTab.trans)} */}
@@ -58,16 +103,19 @@ const SelectedMarkerAgri = ({ marker, closedLocation }) => {
               <div className="selectedMarker__rate">
                 <div className="selectedMarker__rateDesktop">
                   <div className="selectedMarker__blockTop">
-                    <h3 className="selectedMarker__titleRate">{marker.rate}</h3>
+                    <h3 className="selectedMarker__titleRate">{isRated.name}</h3>
                     <p className="selectedMarker__inscription">
                       Inscrit depuis {marker.object.registered_at}
                     </p>
                   </div>
-                  <div className="selectedMarker__stars">
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star"></span>
+                  <div>
+                    {isRated.name ? (
+                      <>
+                        <div>{isRated.star}</div>
+                      </>
+                    ) : (
+                      "Novice"
+                    )}
                   </div>
                   <p>Taille de la ferme: {marker.object.farmsize} hectars</p>
                 </div>
