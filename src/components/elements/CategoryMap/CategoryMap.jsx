@@ -12,7 +12,8 @@ const CategoryMap = ({ filters, setCheck, setFilterAgri, setFilterAch, drawAgri,
 
   return (
     <div className="catmap__wrapper">
-      <h3>Filtrer par produits vendus sur notre site :</h3>
+      <h3 className="catmap__titleDesktop">Filtrer par produits vendus sur notre site :</h3>
+      <h3 className="catmap__titleMobile">Agriculteurs/Acheteurs:</h3>
       <div className="catmap__catWrapper">
         {filters.map((item, i) => (
           <div key={`categorie${i}`} onClick={() => setCheck(i)}>
