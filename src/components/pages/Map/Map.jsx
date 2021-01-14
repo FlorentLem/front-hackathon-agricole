@@ -78,7 +78,7 @@ class Map extends Component {
         item.remove();
       });
       this.props.drawMarker
-        .filter((item) => item.type !== undefined)
+        // .filter((item) => item.type !== undefined)
         .filter(
           (item) =>
             !(
