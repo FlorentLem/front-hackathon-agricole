@@ -93,7 +93,6 @@ class Data extends Component {
     const res = await axios.get("http://localhost:8000/api/agri");
     this.setState({ markers: res.data.res });
     const capital = [];
-    console.log(res.data.villes);
     res.data.villes.map((item) => {
       const dep = Math.floor(item.zipcode / 1000);
       if (!capital.find((el) => el.dep === dep)) {
@@ -187,7 +186,6 @@ class Data extends Component {
       drawAgri,
       firstGenerate,
     } = this.state;
-    console.log(markersAch);
     return (
       <div>
         <Map

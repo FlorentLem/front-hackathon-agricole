@@ -10,16 +10,14 @@ const SelectedMarkerAgri = ({ marker, closedLocation }) => {
   const [somme, setSomme] = useState("");
   const [transSomme, setTransSomme] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/profil/17")
+      .get(`http://localhost:8000/api/profil/${marker.object.id}`)
       .then((res) => res.data)
       .then((data) => {
         setAgriTab(data);
         setIsLoading(false);
         setSomme(data.profil.somme);
-        console.log(data);
       })
       .catch((err) => {
         console.log(err);
@@ -27,7 +25,7 @@ const SelectedMarkerAgri = ({ marker, closedLocation }) => {
   }, []);
   return (
     <div className="selectedMarker__container">
-      {console.log(agriTab)}
+      {/* {console.log(agriTab.trans)} */}
       {isLoading ? (
         <p>loading...</p>
       ) : (
