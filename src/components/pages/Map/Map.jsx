@@ -218,8 +218,6 @@ class Map extends Component {
   }
   render() {
     const { selectedMarker, closedLocation, drawAch, drawAgri } = this.props;
-    console.log(drawAch, "acheteurs");
-    console.log(drawAgri, "agriculteurs");
     return (
       <>
         {selectedMarker && (
