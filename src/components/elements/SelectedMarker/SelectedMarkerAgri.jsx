@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import agri from '../SelectedMarker/assets/logo.svg';
 import cross from './assets/cross.png';
 import './SelectedMarker.scss';
