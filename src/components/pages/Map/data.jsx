@@ -13,6 +13,7 @@ class Data extends Component {
       capital: [],
       drawMarker: [],
       mapGenetate: true,
+      dep: 0,
     };
     this.setSelectedMarker = this.setSelectedMarker.bind(this);
     this.closedLocation = this.closedLocation.bind(this);
@@ -68,20 +69,25 @@ class Data extends Component {
   }
 
   setSelectedCapital = (cap) => {
-    if (this.state.drawMarker.length === 0) {
-      return this.setState({drawMarker: this.state.markers.filter(el => Math.floor(el.zipcode / 1000) === cap.dep )})
+    if (this.state.drawMarker.length === 0 || Math.floor(this.state.drawMarker[0].zipcode / 1000) !== cap.dep) {
+      this.setState({drawMarker: this.state.markers.filter(el => Math.floor(el.zipcode / 1000) === cap.dep )})
+      return this.setState({dep: cap.dep})
     };
+    console.log("clear");
     this.setState({drawMarker: []});
+    return this.setState({dep: 0});
   }
 
   render() {
-    const { drawMarker, selectedMarker, capital, mapGenetate } = this.state;
+    const { drawMarker, selectedMarker, capital, mapGenetate, markers, dep } = this.state;
     return (
       <div>
         <Map
           drawMarker={drawMarker}
+          markers={markers}
           mapGenetate={mapGenetate}
           capital={capital}
+          dep={dep}
           selectedMarker={selectedMarker}
           setMapGenetate = {this.setMapGenetate}
           setSelectedMarker={this.setSelectedMarker}
