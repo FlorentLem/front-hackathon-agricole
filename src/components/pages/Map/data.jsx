@@ -9,7 +9,10 @@ class Data extends Component {
     super();
     this.state = {
       selectedMarker: null,
-      markers: []
+      markers: [],
+      capital: [],
+      drawMarker: [],
+      mapGenetate: true,
     };
     this.setSelectedMarker = this.setSelectedMarker.bind(this);
     this.openLocation = this.openLocation.bind(this);
@@ -19,6 +22,7 @@ class Data extends Component {
   async componentDidMount() {
     const res = await axios.get('http://localhost:8000/api/agri');
       this.setState({ markers: res.data });
+      this.setState({capital: [{ latitude: 47.941807, longitude: 2.003303}]})
   }
 
   setSelectedMarker(index) {
@@ -50,14 +54,29 @@ class Data extends Component {
     });
   }
 
+  setMapGenetate = () => {
+    this.setState({mapGenetate: false});
+  }
+
+  setSelectedCapital = () => {
+    if (this.state.drawMarker.length === 0) {
+      return this.setState({drawMarker: this.state.markers.filter(el => Math.floor(el.zipcode / 1000) === 28 )})
+    };
+    this.setState({drawMarker: []});
+  }
+
   render() {
-    const { markers, selectedMarker } = this.state;
+    const { drawMarker, selectedMarker, capital, mapGenetate } = this.state;
     return (
       <div>
         <Map
-          markers={markers}
+          drawMarker={drawMarker}
+          mapGenetate={mapGenetate}
+          capital={capital}
           selectedMarker={selectedMarker}
+          setMapGenetate = {this.setMapGenetate}
           setSelectedMarker={this.setSelectedMarker}
+          setSelectedCapital={this.setSelectedCapital}
           closedLocation={this.closedLocation}
         />
         <CategoryMap />

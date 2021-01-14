@@ -20,4 +20,21 @@
   cursor: pointer;
 }
 
+.markerMap2 {
+  background-image: url('./assets/marker-A.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 3.6em;
+  height: 3.6em;
+  cursor: pointer;
+  filter: grayscale(100%);
+}
+
+.markerMap2Text {
+  text-align: center;
+  color: #5a9449;
+  font-size: 20px;
+  background: rgba(236, 236, 236, 0.5);
+  backdrop-filter: blur(2px);
+}
 
