@@ -7,6 +7,7 @@ mapboxgl.accessToken =
   "pk.eyJ1IjoiZmxvcmVudGxlbSIsImEiOiJja2hveDNuYzcxNWY5MndteDM2djE3NnlxIn0.UuP-JCIEimNyvaSefaRr9A";
 
 let map;
+const displayMarker = [];
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +42,10 @@ class Map extends Component {
         // aaa
       });
     }
-    if (this.props.drawMarker.length !== prevProps.drawMarker.length) {
+    if (this.props.dep !== prevProps.dep) {
+      displayMarker.map((item) => {
+        item.remove();
+      });
       this.props.drawMarker
         .filter((item) => item.type !== undefined)
         .map((point, index) => {
@@ -55,18 +59,23 @@ class Map extends Component {
             });
             setSelectedMarker(index);
           });
-          new mapboxgl.Marker({ element: marker })
+          const mark = new mapboxgl.Marker({ element: marker })
             .setLngLat([point.longitude, point.latitude])
             .addTo(map);
+            displayMarker.push(mark);
         });
+    } else if (this.props.drawMarker.length === 0) {
+      displayMarker.map((item) => {
+        item.remove();
+      });
     }
     if (this.props.capital.length !== prevProps.capital.length) {
-      this.props.capital.map((point, index) => {
+      this.props.capital.map((point) => {
         const markerWrapper = document.createElement("div");
         const marker = document.createElement("div");
         const p = document.createElement('p');
         p.className = "markerMap2Text";
-        p.innerText = "112";
+        p.innerText = this.props.markers.filter((item) => Math.floor(item.zipcode / 1000) === point.dep).length;
         markerWrapper.appendChild(marker);
         markerWrapper.appendChild(p);
         marker.className = "markerMap2";
