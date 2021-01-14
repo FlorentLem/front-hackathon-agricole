@@ -3,8 +3,8 @@ import SelectedMarkerAgri from "./SelectedMarkerAgri";
 import SelectedMarkerAch from "./SelectedMarkerAch";
 import "./SelectedMarker.scss";
 
-const SelectedMarker = ({ marker }) => {
-  return <>{marker.role ? <SelectedMarkerAgri marker={marker} /> : <SelectedMarkerAch marker={marker} />}</>;
+const SelectedMarker = ({ marker, closedLocation }) => {
+  return <>{marker.object.role ? <SelectedMarkerAgri marker={marker} closedLocation={closedLocation} />  : <SelectedMarkerAch marker={marker} closedLocation={closedLocation} />}</>;
 };
 
 export default SelectedMarker;

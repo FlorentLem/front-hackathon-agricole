@@ -1,0 +1,40 @@
+.map {
+  &__globalContainer {
+    height: 100vh;
+    width: 100%;
+    cursor: grabbing;
+    outline: none;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+.markerMap {
+  background-image: url('./assets/marker-A.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 1.6em;
+  height: 1.6em;
+  cursor: pointer;
+}
+
+.markerMap2 {
+  background-image: url('./assets/marker-A.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 2.2em;
+  height: 2.2em;
+  cursor: pointer;
+  filter: grayscale(100%);
+}
+
+.markerMap2Text {
+  text-align: center;
+  color: #5a9449;
+  font-size: 14px;
+  background: rgba(236, 236, 236, 0.5);
+  backdrop-filter: blur(2px);
+}
+

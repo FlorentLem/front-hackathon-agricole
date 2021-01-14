@@ -1,13 +1,17 @@
 .selectedMarker {
   &__container {
+    bottom: 0;
+    z-index: 500;
     position: absolute;
     width: 400px;
+    height: 85vh;
+    overflow-y: scroll;
     // height: 700px;
     box-shadow: 0 0 1rem 0 rgb(0, 0, 0, 0.2);
     border-radius: 20px;
     background-color: transparent;
     backdrop-filter: blur(2px);
-    margin: 50px 0 0 20px;
+    margin: 50px 0 20px 20px;
   }
   &__head {
     position: relative;
@@ -16,6 +20,7 @@
     justify-content: space-evenly;
     align-items: center;
     border-radius: 20px;
+    background-color: #5a9449;
 
     h2 {
       color: white;
@@ -57,7 +62,7 @@
     display: flex;
     padding: 35px 25px 35px 25px;
     margin: 20px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.562);
     backdrop-filter: blur(2px);
     border-radius: 20px;
     width: 96%;
@@ -67,9 +72,9 @@
       font-size: 26px;
     }
 
-    p{
-        margin-top: 20px;
-        font-weight: 500;
+    p {
+      margin-top: 20px;
+      font-weight: 500;
     }
   }
   &__stars {
@@ -135,6 +140,51 @@
     outline-width: 0;
     i {
       margin-top: 5px;
+    }
+  }
+  &__rateMobile {
+    display: none;
+  }
+  &__dateMobile{
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .selectedMarker {
+    &__container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      margin: 0;
+    }
+    &__head {
+      background-color: transparent;
+      align-items: flex-start;
+
+      h2 {
+        color: #5a9449;
+        padding: 10px 0 0 30px;
+      }
+    }
+    &__img {
+      display: none;
+    }
+    &__rate {
+      background-color: transparent;
+    }
+    &__rateDesktop {
+      display: none;
+    }
+    &__rateMobile {
+      display: flex;
+    }
+    &__dateDesktop {
+      display: none;
+    }
+    &__dateMobile {
+      display: flex;
     }
   }
 }
