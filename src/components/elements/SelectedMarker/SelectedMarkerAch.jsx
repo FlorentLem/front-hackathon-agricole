@@ -4,7 +4,7 @@ import cross from "./assets/cross.png";
 import logo from "./assets/logo.svg";
 import "./SelectedMarker.scss";
 
-const SelectedMarkerAch = ({marker}) => {
+const SelectedMarkerAch = ({ marker, closedLocation }) => {
   return (
     <div className="selectedMarker__container">
       <div
@@ -14,7 +14,9 @@ const SelectedMarkerAch = ({marker}) => {
         }}
       >
         <div
+          onClick={closedLocation}
           className="selectedMarker__closeMenu"
+          type="button"
           style={{
             backgroundImage: `url(${cross})`,
             boxShadow: "3px 3px 7px #383838, -3px -3px 5px #b1b1b185",
@@ -77,7 +79,8 @@ const SelectedMarkerAch = ({marker}) => {
             backgroundColor: "#565656",
           }}
         >
-          En savoir plus <i className="fa fa-chevron-right" aria-hidden="true"></i>
+          En savoir plus{" "}
+          <i className="fa fa-chevron-right" aria-hidden="true"></i>
         </button>
       </div>
     </div>

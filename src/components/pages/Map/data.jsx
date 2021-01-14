@@ -15,7 +15,6 @@ class Data extends Component {
       mapGenetate: true,
     };
     this.setSelectedMarker = this.setSelectedMarker.bind(this);
-    this.openLocation = this.openLocation.bind(this);
     this.closedLocation = this.closedLocation.bind(this);
   }
 
@@ -38,12 +37,13 @@ class Data extends Component {
     this.setState({
       selectedMarker: {
         object: this.state.markers[index],
-        id: index
+        id: index,
+        rate: "Expert"
       }
     });
   }
 
-  closedLocation() {
+  closedLocation () {
     this.setState({
       selectedMarker: null
     });

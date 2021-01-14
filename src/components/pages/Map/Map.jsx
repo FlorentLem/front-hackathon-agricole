@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import SelectedMarker from "../../elements/SelectedMarker/SelectedMarker";
 import "./Map.scss";
 
 import mapboxgl from "mapbox-gl";
@@ -89,9 +90,12 @@ class Map extends Component {
     return (
       <>
         {selectedMarker && (
-          <div>
-            <h1>hello</h1>
-          </div>
+          <>
+            <SelectedMarker
+              marker={selectedMarker}
+              closedLocation={closedLocation}
+            />
+          </>
         )}
         <div
           ref={(el) => (this.mapContainer = el)}
