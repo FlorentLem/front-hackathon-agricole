@@ -27,8 +27,6 @@ class Map extends Component {
       setSelectedCapital,
       setMapGenetate,
     } = this.props;
-    console.log(this.props.drawMarker.length);
-    console.log(this.props.generateMap);
     if (this.props.mapGenetate) {
       map = new mapboxgl.Map({
         container: this.mapContainer,
@@ -56,7 +54,6 @@ class Map extends Component {
             });
             setSelectedMarker(index);
           });
-
           new mapboxgl.Marker({ element: marker })
             .setLngLat([point.longitude, point.latitude])
             .addTo(map);
@@ -75,10 +72,10 @@ class Map extends Component {
         marker.addEventListener("click", function () {
           map.flyTo({
             center: [point.longitude, point.latitude],
-            zoom: 10.5,
-            speed: 1.1,
+            zoom: 8.0,
+            speed: 0.9,
           });
-          setSelectedCapital(index);
+          setSelectedCapital(point);
         });
 
         new mapboxgl.Marker({ element: markerWrapper })

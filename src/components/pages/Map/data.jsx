@@ -21,8 +21,17 @@ class Data extends Component {
 
   async componentDidMount() {
     const res = await axios.get('http://localhost:8000/api/agri');
-      this.setState({ markers: res.data });
-      this.setState({capital: [{ latitude: 47.941807, longitude: 2.003303}]})
+    this.setState({ markers: res.data.res });
+    const capital = [];
+    console.log(res.data.villes)
+    res.data.villes.map((item) => {
+      const dep = Math.floor(item.zipcode / 1000);
+      if (!capital.find(el => el.dep === dep)) {
+        capital.push({dep: dep, latitude: item.latitude, longitude: item.longitude})
+      }
+      return item;
+    })
+    this.setState({ capital: capital })
   }
 
   setSelectedMarker(index) {
@@ -58,9 +67,9 @@ class Data extends Component {
     this.setState({mapGenetate: false});
   }
 
-  setSelectedCapital = () => {
+  setSelectedCapital = (cap) => {
     if (this.state.drawMarker.length === 0) {
-      return this.setState({drawMarker: this.state.markers.filter(el => Math.floor(el.zipcode / 1000) === 28 )})
+      return this.setState({drawMarker: this.state.markers.filter(el => Math.floor(el.zipcode / 1000) === cap.dep )})
     };
     this.setState({drawMarker: []});
   }
