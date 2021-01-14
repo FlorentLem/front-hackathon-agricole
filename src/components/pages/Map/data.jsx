@@ -9,7 +9,10 @@ class Data extends Component {
     super();
     this.state = {
       selectedMarker: null,
-      markers: []
+      markers: [],
+      capital: [],
+      drawMarker: [],
+      mapGenetate: true,
     };
     this.setSelectedMarker = this.setSelectedMarker.bind(this);
     this.closedLocation = this.closedLocation.bind(this);
@@ -17,7 +20,17 @@ class Data extends Component {
 
   async componentDidMount() {
     const res = await axios.get('http://localhost:8000/api/agri');
-      this.setState({ markers: res.data.res });
+    this.setState({ markers: res.data.res });
+    const capital = [];
+    console.log(res.data.villes)
+    res.data.villes.map((item) => {
+      const dep = Math.floor(item.zipcode / 1000);
+      if (!capital.find(el => el.dep === dep)) {
+        capital.push({dep: dep, latitude: item.latitude, longitude: item.longitude})
+      }
+      return item;
+    })
+    this.setState({ capital: capital })
   }
 
   setSelectedMarker(index) {
@@ -36,15 +49,43 @@ class Data extends Component {
     });
   }
 
+  openLocation() {
+    const { selectedMarker, markers } = this.state;
+    const array = markers;
+    array[selectedMarker.id] = {
+      name: markers.name,
+      ressources: markers.ressources
+    };
+
+    this.setState({
+      markes: array,
+      selectedMarker: null
+    });
+  }
+
+  setMapGenetate = () => {
+    this.setState({mapGenetate: false});
+  }
+
+  setSelectedCapital = (cap) => {
+    if (this.state.drawMarker.length === 0) {
+      return this.setState({drawMarker: this.state.markers.filter(el => Math.floor(el.zipcode / 1000) === cap.dep )})
+    };
+    this.setState({drawMarker: []});
+  }
+
   render() {
-    const { markers, selectedMarker } = this.state;
-    console.log(selectedMarker);
+    const { drawMarker, selectedMarker, capital, mapGenetate } = this.state;
     return (
       <div>
         <Map
-          markers={markers}
+          drawMarker={drawMarker}
+          mapGenetate={mapGenetate}
+          capital={capital}
           selectedMarker={selectedMarker}
+          setMapGenetate = {this.setMapGenetate}
           setSelectedMarker={this.setSelectedMarker}
+          setSelectedCapital={this.setSelectedCapital}
           closedLocation={this.closedLocation}
         />
         <CategoryMap />
