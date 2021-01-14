@@ -10,6 +10,17 @@ class Data extends Component {
     this.state = {
       selectedMarker: null,
       markers: [],
+      filters: [
+            {type: "ble", label: 'Blé', checked: false, img:"https://api.comparateuragricole.com/media/images/cache/thumbnail_xs/5b87b47e69daf_blé tous-01.jpg"},
+            {type: "avoine", label: 'Avoine', checked: false, img:"https://api.comparateuragricole.com/media/images/cache/thumbnail_xs/5b87b918e922a_avoine blanche-01.jpg"},
+            {type: "triticale", label: 'Triticale', checked: false, img:"https://api.comparateuragricole.com/media/images/cache/thumbnail_xs/5c24d7b7cf8f1_triticalegrain.jpg"},
+            {type: "orge", label: 'Orge', checked: false, img:"https://api.comparateuragricole.com/media/images/cache/thumbnail_xs/5b87b7cced4cf_orge graine-01.jpg"},
+            {type: "mais", label: 'Maïs', checked: false, img:"https://api.comparateuragricole.com/media/images/cache/thumbnail_xs/5b87a4eae5c90_maïs-01.jpg"},
+            {type: "pois", label: 'Pois', checked: false, img:"https://api.comparateuragricole.com/media/images/cache/thumbnail_xs/5b87c659b29a0_Pois graines-01.jpg"},
+            {type: "colza", label: 'Colza', checked: false, img:"https://api.comparateuragricole.com/media/images/cache/thumbnail_xs/5b87b1d263bd2_colza oleoproteagineux-01.jpg"},
+            {type: "tournesol", label: 'Tournesol', checked: false, img:"https://api.comparateuragricole.com/media/images/cache/thumbnail_xs/5b87c740ec873_tournesol graines-01.jpg"},
+            {type: "feverol", label: 'Féveroles', checked: false, img:"https://api.comparateuragricole.com/media/images/cache/thumbnail_xs/5b87db864936b_féveroles graines-01.jpg"},
+        ],
       capital: [],
       drawMarker: [],
       mapGenetate: true,
@@ -17,6 +28,7 @@ class Data extends Component {
     };
     this.setSelectedMarker = this.setSelectedMarker.bind(this);
     this.closedLocation = this.closedLocation.bind(this);
+    this.setCheck = this.setCheck.bind(this);
   }
 
   async componentDidMount() {
@@ -50,19 +62,13 @@ class Data extends Component {
     });
   }
 
-  openLocation() {
-    const { selectedMarker, markers } = this.state;
-    const array = markers;
-    array[selectedMarker.id] = {
-      name: markers.name,
-      ressources: markers.ressources
-    };
-
+  setCheck (i) {
+    const temp = JSON.parse(JSON.stringify(this.state.filters));
+    temp[i].checked = !temp[i].checked;
     this.setState({
-      markes: array,
-      selectedMarker: null
+      filters: temp
     });
-  }
+}
 
   setMapGenetate = () => {
     this.setState({mapGenetate: false});
@@ -79,7 +85,8 @@ class Data extends Component {
   }
 
   render() {
-    const { drawMarker, selectedMarker, capital, mapGenetate, markers, dep } = this.state;
+    const {setCheck} = this;
+    const { drawMarker, selectedMarker, capital, mapGenetate, markers, dep, filters } = this.state;
     return (
       <div>
         <Map
@@ -93,8 +100,9 @@ class Data extends Component {
           setSelectedMarker={this.setSelectedMarker}
           setSelectedCapital={this.setSelectedCapital}
           closedLocation={this.closedLocation}
+          filters={filters}
         />
-        <CategoryMap />
+        <CategoryMap filters={filters} setCheck={setCheck} />
       </div>
     );
   }
