@@ -13,6 +13,7 @@ class Data extends Component {
       markersAch: [],
       drawAgri: true,
       drawAch: false,
+      firstGenerate: true,
       filters: [
         {
           type: "ble",
@@ -139,6 +140,10 @@ class Data extends Component {
     this.setState({ mapGenetate: false });
   };
 
+  setFirstGenerate = () => {
+    this.setState({ firstGenerate: false });
+  };
+
   setSelectedCapital = (cap) => {
     if (
       this.state.drawMarker.length === 0 ||
@@ -168,7 +173,7 @@ class Data extends Component {
   };
 
   render() {
-    const { setCheck, setFilterAch, setFilterAgri } = this;
+    const { setCheck, setFilterAch, setFilterAgri, setFirstGenerate } = this;
     const {
       drawMarker,
       selectedMarker,
@@ -180,6 +185,7 @@ class Data extends Component {
       markersAch,
       drawAch,
       drawAgri,
+      firstGenerate,
     } = this.state;
     console.log(markersAch);
     return (
@@ -200,6 +206,8 @@ class Data extends Component {
           setSelectedCapitalAch={this.setSelectedCapitalAch}
           closedLocation={this.closedLocation}
           filters={filters}
+          firstGenerate={firstGenerate}
+          setFirstGenerate={setFirstGenerate}
         />
         <CategoryMap
           drawAch={drawAch}

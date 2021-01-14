@@ -31,13 +31,17 @@ class Map extends Component {
     } = this.props;
     if (drawAch !== prevProps.drawAch || drawAgri !== prevProps.drawAgri) {
       let array = [];
+      let array2 = [];
       if (!drawAch) {
         array = displayCurrent.filter((el) => el.type === "acheteur");
       }
       if (!drawAgri) {
-        array = displayCurrent.filter((el) => el.type === "agriculteur");
+        array2 = displayCurrent.filter((el) => el.type === "agriculteur");
       }
       array.map((item) => {
+        item.mark.remove();
+      });
+      array2.map((item) => {
         item.mark.remove();
       });
     }
@@ -154,7 +158,7 @@ class Map extends Component {
     }
     if (
       (drawAgri !== prevProps.drawAgri && drawAgri) ||
-      this.props.mapGenetate
+      (this.props.firstGenerate && this.props.capital.length !== 0)
     ) {
       this.props.capital.map((point) => {
         const markerWrapper = document.createElement("div");
@@ -181,6 +185,7 @@ class Map extends Component {
           .addTo(map);
         displayCurrent.push({ mark: mark, type: "agriculteur" });
       });
+      this.props.setFirstGenerate()
     }
     if (drawAch !== prevProps.drawAch && drawAch) {
       this.props.markersAch.map((point) => {
