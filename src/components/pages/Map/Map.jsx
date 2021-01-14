@@ -38,6 +38,11 @@ class Map extends Component {
       if (!drawAgri) {
         array2 = displayCurrent.filter((el) => el.type === "agriculteur");
       }
+      if (array2.length !== 0) {
+        displayMarker.map((item) => {
+          item.remove();
+        });
+      }
       array.map((item) => {
         item.mark.remove();
       });
@@ -53,16 +58,16 @@ class Map extends Component {
         zoom: this.state.zoom,
         attributionControl: false,
       });
-        map.addControl(
-          new mapboxgl.GeolocateControl({
-            positionOptions: {
-              enableHighAccuracy: false,
-            },
-            trackUserLocation: true,
-            fitBoundsOptions:{maxZoom:8},
-          })
-        )
-        map.addControl(new mapboxgl.NavigationControl());
+      map.addControl(
+        new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: false,
+          },
+          trackUserLocation: true,
+          fitBoundsOptions: { maxZoom: 8 },
+        })
+      );
+      map.addControl(new mapboxgl.NavigationControl());
       setMapGenetate();
       map.on("load", function () {
         // aaa
@@ -187,7 +192,7 @@ class Map extends Component {
           .addTo(map);
         displayCurrent.push({ mark: mark, type: "agriculteur" });
       });
-      this.props.setFirstGenerate()
+      this.props.setFirstGenerate();
     }
     if (drawAch !== prevProps.drawAch && drawAch) {
       this.props.markersAch.map((point) => {
