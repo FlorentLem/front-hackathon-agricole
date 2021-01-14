@@ -38,6 +38,15 @@ class Map extends Component {
         zoom: this.state.zoom,
         attributionControl: false,
       });
+        map.addControl(
+          new mapboxgl.GeolocateControl({
+            positionOptions: {
+              enableHighAccuracy: false,
+            },
+            trackUserLocation: true,
+            fitBoundsOptions:{maxZoom:8},
+          })
+        )
       setMapGenetate();
       map.on("load", function () {
         // aaa
@@ -47,7 +56,6 @@ class Map extends Component {
       displayMarker.map((item) => {
         item.remove();
       });
-      console.log("object");
       this.props.drawMarker
         .filter((item) => item.type !== undefined)
         .filter((item) => !(filters[0].checked && item.type.includes(filters[0].type.toLowerCase())))
