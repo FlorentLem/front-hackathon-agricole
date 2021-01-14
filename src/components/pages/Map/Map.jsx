@@ -53,15 +53,17 @@ class Map extends Component {
         zoom: this.state.zoom,
         attributionControl: false,
       });
-      map.addControl(
-        new mapboxgl.GeolocateControl({
-          positionOptions: {
-            enableHighAccuracy: false,
-          },
-          trackUserLocation: true,
-          fitBoundsOptions: { maxZoom: 8 },
-        })
-      );
+        map.addControl(
+          new mapboxgl.GeolocateControl({
+            positionOptions: {
+              enableHighAccuracy: false,
+            },
+            trackUserLocation: true,
+            fitBoundsOptions:{maxZoom:8},
+          })
+        )
+        map.addControl(new mapboxgl.NavigationControl());
+      setMapGenetate();
       map.on("load", function () {
         // aaa
       });
