@@ -19,7 +19,7 @@ const App = () => {
   ];
 
   return (
-    <>
+    <div className="App">
       <Header />
       <Router>
         <Switch>
@@ -28,7 +28,7 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
-    </>
+    </div>
   );
 }
 
