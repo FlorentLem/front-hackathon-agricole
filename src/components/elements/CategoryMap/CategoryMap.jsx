@@ -6,9 +6,9 @@ import ach from "./assets/usine2.png";
 import agriBlanc from "./assets/tracteur_blanc.png";
 import achBlanc from "./assets/usine2_blanc.png";
 
-const CategoryMap = ({ filters, setCheck }) => {
-  const [clickAgri, setClickAgri] = useState(true);
-  const [clickAch, setClickAch] = useState(false);
+const CategoryMap = ({ filters, setCheck, setFilterAgri, setFilterAch, drawAgri, drawAch }) => {
+  const [clickAgri, setClickAgri] = useState(drawAgri);
+  const [clickAch, setClickAch] = useState(drawAch);
 
   return (
     <div className="catmap__wrapper">
@@ -31,6 +31,7 @@ const CategoryMap = ({ filters, setCheck }) => {
         <div
           onClick={() => {
             setClickAgri(!clickAgri);
+            setFilterAgri(!clickAgri);
           }}
           style={{
             backgroundImage: clickAgri ? `url(${agriBlanc})` : `url(${agri})`,
@@ -40,6 +41,7 @@ const CategoryMap = ({ filters, setCheck }) => {
         <div
           onClick={() => {
             setClickAch(!clickAch);
+            setFilterAch(!clickAch);
           }}
           style={{
             backgroundImage: clickAch ? `url(${achBlanc})` : `url(${ach})`,

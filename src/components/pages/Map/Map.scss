@@ -20,6 +20,14 @@
   cursor: pointer;
 }
 
+.markerMapAcheteur {
+  background-image: url('./assets/markerAcheteur.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 1.6em;
+  height: 1.6em;
+  cursor: pointer;
+}
 .markerMap2 {
   background-image: url('./assets/marker-A.svg');
   background-size: contain;
@@ -36,5 +44,9 @@
   font-size: 14px;
   background: rgba(236, 236, 236, 0.5);
   backdrop-filter: blur(2px);
+}
+
+.mapboxgl-ctrl {
+  margin-top: 80px !important;
 }
 
