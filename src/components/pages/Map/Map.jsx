@@ -7,6 +7,7 @@ mapboxgl.accessToken =
   "pk.eyJ1IjoiZmxvcmVudGxlbSIsImEiOiJja2hveDNuYzcxNWY5MndteDM2djE3NnlxIn0.UuP-JCIEimNyvaSefaRr9A";
 
 let map;
+const displayMarker = [];
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -42,20 +43,22 @@ class Map extends Component {
         // aaa
       });
     }
-
-    
-    if (this.props.drawMarker.length !== prevProps.drawMarker.length) {
+    if (this.props.dep !== prevProps.dep || filters !== prevProps.filters) {
+      displayMarker.map((item) => {
+        item.remove();
+      });
+      console.log("object");
       this.props.drawMarker
         .filter((item) => item.type !== undefined)
-        .filter((item) => filters[0].checked && item.type.includes(filters[0].type))
-        .filter((item) => filters[1].checked && item.type.includes(filters[1].type))
-        .filter((item) => filters[2].checked && item.type.includes(filters[2].type))
-        .filter((item) => filters[3].checked && item.type.includes(filters[3].type))
-        .filter((item) => filters[4].checked && item.type.includes(filters[4].type))
-        .filter((item) => filters[5].checked && item.type.includes(filters[5].type))
-        .filter((item) => filters[6].checked && item.type.includes(filters[6].type))
-        .filter((item) => filters[7].checked && item.type.includes(filters[7].type))
-        .filter((item) => filters[8].checked && item.type.includes(filters[8].type))
+        .filter((item) => !(filters[0].checked && item.type.includes(filters[0].type.toLowerCase())))
+        .filter((item) => !(filters[1].checked && item.type.includes(filters[1].type.toLowerCase())))
+        .filter((item) => !(filters[2].checked && item.type.includes(filters[2].type.toLowerCase())))
+        .filter((item) => !(filters[3].checked && item.type.includes(filters[3].type.toLowerCase())))
+        .filter((item) => !(filters[4].checked && item.type.includes(filters[4].type.toLowerCase())))
+        .filter((item) => !(filters[5].checked && item.type.includes(filters[5].type.toLowerCase())))
+        .filter((item) => !(filters[6].checked && item.type.includes(filters[6].type.toLowerCase())))
+        .filter((item) => !(filters[7].checked && item.type.includes(filters[7].type.toLowerCase())))
+        .filter((item) => !(filters[8].checked && item.type.includes(filters[8].type.toLowerCase())))
         .map((point, index) => {
           const marker = document.createElement("div");
           marker.className = "markerMap";
@@ -67,18 +70,23 @@ class Map extends Component {
             });
             setSelectedMarker(index);
           });
-          new mapboxgl.Marker({ element: marker })
+          const mark = new mapboxgl.Marker({ element: marker })
             .setLngLat([point.longitude, point.latitude])
             .addTo(map);
+            displayMarker.push(mark);
         });
+    } else if (this.props.drawMarker.length === 0) {
+      displayMarker.map((item) => {
+        item.remove();
+      });
     }
     if (this.props.capital.length !== prevProps.capital.length) {
-      this.props.capital.map((point, index) => {
+      this.props.capital.map((point) => {
         const markerWrapper = document.createElement("div");
         const marker = document.createElement("div");
         const p = document.createElement('p');
         p.className = "markerMap2Text";
-        p.innerText = "112";
+        p.innerText = this.props.markers.filter((item) => Math.floor(item.zipcode / 1000) === point.dep).length;
         markerWrapper.appendChild(marker);
         markerWrapper.appendChild(p);
         marker.className = "markerMap2";

@@ -11,7 +11,7 @@ const CategoryMap = ({filters, setCheck}) => {
             <div className="catmap__catWrapper">
                 {filters.map((item, i) => (
                     <div key={`categorie${i}`} onClick={() => setCheck(i)}>
-                        <img className={item.checked ? "catmap__img": "catmap__img catmap__imgChecked"} src={item.img} alt={item.label}></img>
+                        <img className={!item.checked ? "catmap__img": "catmap__img catmap__imgChecked"} src={item.img} alt={item.label}></img>
                         <span>{item.label}</span>
                     </div>
                 ))}
