@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import CategoryMap from '../../elements/CategoryMap/CategoryMap';
 
 import Map from './Map';
 
@@ -59,6 +60,7 @@ class Data extends Component {
           setSelectedMarker={this.setSelectedMarker}
           closedLocation={this.closedLocation}
         />
+        <CategoryMap />
       </div>
     );
   }
