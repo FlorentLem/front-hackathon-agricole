@@ -1,4 +1,21 @@
 .selectedMarker {
+  //new modif
+  &__titleRate {
+    font-size: 26px;
+    font-weight: 500;
+  }
+
+  &__blockTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__inscription {
+    font-size: 15px;
+  }
+  //finish new modif
   &__container {
     bottom: 0;
     z-index: 500;
@@ -66,20 +83,11 @@
     backdrop-filter: blur(2px);
     border-radius: 20px;
     width: 96%;
-
-    h3 {
-      font-weight: 500;
-      font-size: 26px;
-    }
-
-    p {
-      margin-top: 20px;
-      font-weight: 500;
-    }
   }
   &__stars {
     font-size: 30px;
     opacity: 0.7;
+    margin-bottom: 15px;
 
     .checked {
       color: gold;
@@ -111,19 +119,7 @@
     flex-direction: column;
     justify-content: space-evenly;
   }
-
-  &__about {
-    padding: 30px;
-    h3 {
-      font-weight: 500;
-      font-size: 26px;
-    }
-    p {
-      margin-top: 20px;
-      font-size: 20px;
-      font-weight: 300;
-    }
-  }
+  
   &__buttonAccess {
     color: white;
     border: none;
@@ -145,7 +141,7 @@
   &__rateMobile {
     display: none;
   }
-  &__dateMobile{
+  &__dateMobile {
     display: none;
   }
 }
