@@ -8,36 +8,40 @@ const ProfileAgriMobile = () => {
 
     const [agri, setAgri] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-    const [isRated, setIsRated] = useState([{name:"", valeur:0}]);
+    const [isRated, setIsRated] = useState([{name:"", valeur:0, star:""}]);
 
     const rate = [
         {
             "name": "Inscrit",
-            "valeur":0
+            "valeur":0, 
+            "star": "☆☆☆☆"
         },
         {
             "name": "Novice",
-            "valeur":60
+            "valeur":60,
+            "star":"⭐️☆☆☆"
         },      
         {
             "name": "Intermédiaire",
-            "valeur":120
+            "valeur":120,
+            "star":"⭐️⭐️☆☆"
         },
         {
             "name": "Confirmé",
-            "valeur":180
+            "valeur":180,
+            "star": "⭐️⭐️⭐️☆"
         },
         {
             "name": "Expert",
-            "valeur":240
+            "valeur":240,
+            "star": "⭐️⭐️⭐️⭐️"
+
         }
     ]
 
-
-
     useEffect(() => {
         axios
-          .get("http://localhost:8000/api/profil/6")
+          .get("http://localhost:8000/api/profil/7")
           .then((res) => res.data)
           .then((data) => {
             setAgri(data);            
@@ -54,7 +58,7 @@ const ProfileAgriMobile = () => {
           console.log(agri);
           for(let i=0; i <= rate.length - 1; i++) {
               if (data.profil.somme >= rate[i].valeur) {
-                setIsRated({name: rate[i].name, valeur: rate[i].valeur})
+                setIsRated({name: rate[i].name, valeur: rate[i].valeur, star: rate[i].star})
               }
           }
       }
@@ -75,14 +79,14 @@ const ProfileAgriMobile = () => {
                     <img src={logoCA} alt="logo Comparateur Agricole" />
                 </div>
                 <div className="box-info">
-                    <h2>{isRated.name ? isRated.name : "Novice"}</h2>
-
-                    <div className="stars">
-                        <span className="fa fa-star checked"></span>
-                        <span className="fa fa-star checked"></span>
-                        <span className="fa fa-star checked"></span>
-                        <span className="fa fa-star"></span>
-                    </div>
+                    <div>
+                        {isRated.name ? 
+                        (
+                        <>
+                        <h2>{isRated.name}</h2>
+                        <div>{isRated.star}</div>
+                        </>
+                        ) : "Novice"}</div>
 
                     <h2>Inscrit depuis {agri.profil.registered_at}</h2>
                 </div> 
