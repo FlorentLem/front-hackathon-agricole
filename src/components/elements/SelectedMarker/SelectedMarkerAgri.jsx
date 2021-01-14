@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import agri from '../SelectedMarker/assets/agriculteur.svg';
 import ProgressBar from '../ProgressBar/ProgressBar';
+=======
+import React from 'react';
+import agri from '../SelectedMarker/assets/logo.svg';
+>>>>>>> ba46a98cc4ea323b405f6c9322e56d573ea6406e
 import cross from './assets/cross.png';
 import './SelectedMarker.scss';
 
