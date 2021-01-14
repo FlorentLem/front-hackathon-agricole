@@ -26,6 +26,8 @@
             width: 33.33%;
             display: flex;
             align-items: center;
+            cursor: pointer;
+            user-select: none;
         }
     }
 
@@ -43,11 +45,17 @@
         width: 100%;
         display: flex;
         margin-top: 7px;
-        justify-content: space-between;
-        img {
+        justify-content: space-evenly;
+        div {
             background-color: #E9E9E9;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
             box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.55), 2px 2px 5px #B7B4B4;
             border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            cursor: pointer;
         }
     }
 }
