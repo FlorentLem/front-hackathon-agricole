@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-import Map from './components/pages/Map/data';
 import Header from './components/elements/Header/Header';
+import ProfileAgriMobile from './components/elements/MobileFiche/ProfileAgriMobile';
 
 const App = () => {
   return (
@@ -9,7 +8,7 @@ const App = () => {
       <Header />
       <Router>
         <Switch>
-          <Route exact path='/' component={Map} />
+          <Route exact path='/' component={ProfileAgriMobile} />
         </Switch>
       </Router>
     </>
