@@ -20,6 +20,10 @@ $bold: 700;
 $semi-bold: 600;
 $regular: 400;
 
+.full-box {
+    width: 100%;
+    border: 1px solid;
+}
 .avatar-bg {
     background-image: url("./assets/fermier.svg");
     background-color: $primary;
@@ -92,4 +96,14 @@ $regular: 400;
 .box-céréales-ach h1 {
     color: $dark-grey;
     font-size: 20px;
+}
+
+@media screen and (min-width: 769px) {
+    .avatar-bg, avatar-acheteur {
+        border-radius: 20px;
+        position: absolute;
+        width: 400px;
+    }
+
+
 }

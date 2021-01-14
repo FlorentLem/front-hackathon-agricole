@@ -4,7 +4,7 @@ import logoCA from "./assets/logoCA.png";
 
 const ProfileAcheMobile = () => {
     return (
-        <div>
+        <div className="full-box">
             <div className="avatar-acheteur"></div>
 
             <div className="box-agriculteur">
