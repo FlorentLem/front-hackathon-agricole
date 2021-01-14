@@ -7,7 +7,7 @@ import maleLogo from "./assets/male.svg";
 const CategoryMap = ({filters, setCheck}) => {
     return (
         <div className="catmap__wrapper">
-            <h3>Filtrer par cérérales:</h3>
+            <h3>Filtrer par produits vendus sur notre site :</h3>
             <div className="catmap__catWrapper">
                 {filters.map((item, i) => (
                     <div key={`categorie${i}`} onClick={() => setCheck(i)}>
