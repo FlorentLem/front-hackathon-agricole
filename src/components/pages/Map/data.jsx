@@ -10,6 +10,7 @@ class Data extends Component {
     this.state = {
       selectedMarker: null,
       markers: [],
+      markersAch: [],
       filters: [
             {type: "ble", label: 'Blé', checked: false, img:"https://api.comparateuragricole.com/media/images/cache/thumbnail_xs/5b87b47e69daf_blé tous-01.jpg"},
             {type: "avoine", label: 'Avoine', checked: false, img:"https://api.comparateuragricole.com/media/images/cache/thumbnail_xs/5b87b918e922a_avoine blanche-01.jpg"},
@@ -23,6 +24,7 @@ class Data extends Component {
         ],
       capital: [],
       drawMarker: [],
+      drawMarkerAch: [],
       mapGenetate: true,
       dep: 0,
     };
@@ -44,6 +46,10 @@ class Data extends Component {
       return item;
     })
     this.setState({ capital: capital })
+    const resTwo = await axios.get('http://localhost:8000/api/acheteurs');
+    this.setState({
+      markersAch: resTwo.data.getAllAcheteurs,
+    })
   }
 
   setSelectedMarker(index) {
@@ -79,19 +85,30 @@ class Data extends Component {
       this.setState({drawMarker: this.state.markers.filter(el => Math.floor(el.zipcode / 1000) === cap.dep )})
       return this.setState({dep: cap.dep})
     };
-    console.log("clear");
     this.setState({drawMarker: []});
+    return this.setState({dep: 0});
+  }
+
+  setSelectedCapitalAch = (cap) => {
+    if (this.state.drawMarkerAch.length === 0 || Math.floor(this.state.drawMarkerAch[0].zipcode / 1000) !== cap.dep) {
+      this.setState({drawMarkerAch: this.state.markersAch.filter(el => Math.floor(el.zipcode / 1000) === cap.dep )})
+      return this.setState({dep: cap.dep})
+    };
+    this.setState({drawMarkerAch: []});
     return this.setState({dep: 0});
   }
 
   render() {
     const {setCheck} = this;
-    const { drawMarker, selectedMarker, capital, mapGenetate, markers, dep, filters } = this.state;
+    const { drawMarker, selectedMarker, capital, mapGenetate, markers, dep, filters, markersAch, drawMarkerAch } = this.state;
+    console.log(markersAch);
     return (
       <div>
         <Map
+          drawMarkerAch={drawMarkerAch}
           drawMarker={drawMarker}
           markers={markers}
+          markersAch={markersAch}
           mapGenetate={mapGenetate}
           capital={capital}
           dep={dep}

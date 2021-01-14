@@ -47,7 +47,6 @@ class Map extends Component {
       displayMarker.map((item) => {
         item.remove();
       });
-      console.log("object");
       this.props.drawMarker
         .filter((item) => item.type !== undefined)
         .filter((item) => !(filters[0].checked && item.type.includes(filters[0].type.toLowerCase())))
@@ -75,6 +74,10 @@ class Map extends Component {
             .addTo(map);
             displayMarker.push(mark);
         });
+      // this.props.drawMarkerAch.map((point, index) => {
+      //   const marker = document.createElement("div");
+
+      // })
     } else if (this.props.drawMarker.length === 0) {
       displayMarker.map((item) => {
         item.remove();
