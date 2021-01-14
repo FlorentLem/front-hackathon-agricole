@@ -98,10 +98,12 @@ $regular: 400;
     font-size: 20px;
 }
 
-.stars {
-    font-size: 30px;
-    opacity: 0.7;
-}
-.checked {
-    color: gold
+@media screen and (min-width: 769px) {
+    .avatar-bg, avatar-acheteur {
+        border-radius: 20px;
+        position: absolute;
+        width: 400px;
+    }
+
+
 }

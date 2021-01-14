@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import Map from './components/pages/Map/data';
 import Header from './components/elements/Header/Header';
-import Map from './components/pages/Map/Map';
 
 const App = () => {
   return (
