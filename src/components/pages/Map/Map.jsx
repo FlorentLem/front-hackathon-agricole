@@ -8,6 +8,7 @@ mapboxgl.accessToken =
 
 let map;
 const displayMarker = [];
+const displayCurrent = [];
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -19,17 +20,31 @@ class Map extends Component {
     };
   }
 
-  componentDidMount() {
-    // console.log( this.props.markers .filter((item) => {return item.type !== undefined}));
-  }
-
   componentDidUpdate(prevProps) {
     const {
       setSelectedMarker,
       setSelectedCapital,
       setMapGenetate,
       filters,
+      drawAch,
+      drawAgri,
     } = this.props;
+    if (drawAch !== prevProps.drawAch || drawAgri !== prevProps.drawAgri) {
+      let array = [];
+      let array2 = [];
+      if (!drawAch) {
+        array = displayCurrent.filter((el) => el.type === "acheteur");
+      }
+      if (!drawAgri) {
+        array2 = displayCurrent.filter((el) => el.type === "agriculteur");
+      }
+      array.map((item) => {
+        item.mark.remove();
+      });
+      array2.map((item) => {
+        item.mark.remove();
+      });
+    }
     if (this.props.mapGenetate) {
       map = new mapboxgl.Map({
         container: this.mapContainer,
@@ -59,16 +74,70 @@ class Map extends Component {
       });
       this.props.drawMarker
         .filter((item) => item.type !== undefined)
-        .filter((item) => !(filters[0].checked && item.type.includes(filters[0].type.toLowerCase())))
-        .filter((item) => !(filters[1].checked && item.type.includes(filters[1].type.toLowerCase())))
-        .filter((item) => !(filters[2].checked && item.type.includes(filters[2].type.toLowerCase())))
-        .filter((item) => !(filters[3].checked && item.type.includes(filters[3].type.toLowerCase())))
-        .filter((item) => !(filters[4].checked && item.type.includes(filters[4].type.toLowerCase())))
-        .filter((item) => !(filters[5].checked && item.type.includes(filters[5].type.toLowerCase())))
-        .filter((item) => !(filters[6].checked && item.type.includes(filters[6].type.toLowerCase())))
-        .filter((item) => !(filters[7].checked && item.type.includes(filters[7].type.toLowerCase())))
-        .filter((item) => !(filters[8].checked && item.type.includes(filters[8].type.toLowerCase())))
-        .map((point, index) => {
+        .filter(
+          (item) =>
+            !(
+              filters[0].checked &&
+              item.type.includes(filters[0].type.toLowerCase())
+            )
+        )
+        .filter(
+          (item) =>
+            !(
+              filters[1].checked &&
+              item.type.includes(filters[1].type.toLowerCase())
+            )
+        )
+        .filter(
+          (item) =>
+            !(
+              filters[2].checked &&
+              item.type.includes(filters[2].type.toLowerCase())
+            )
+        )
+        .filter(
+          (item) =>
+            !(
+              filters[3].checked &&
+              item.type.includes(filters[3].type.toLowerCase())
+            )
+        )
+        .filter(
+          (item) =>
+            !(
+              filters[4].checked &&
+              item.type.includes(filters[4].type.toLowerCase())
+            )
+        )
+        .filter(
+          (item) =>
+            !(
+              filters[5].checked &&
+              item.type.includes(filters[5].type.toLowerCase())
+            )
+        )
+        .filter(
+          (item) =>
+            !(
+              filters[6].checked &&
+              item.type.includes(filters[6].type.toLowerCase())
+            )
+        )
+        .filter(
+          (item) =>
+            !(
+              filters[7].checked &&
+              item.type.includes(filters[7].type.toLowerCase())
+            )
+        )
+        .filter(
+          (item) =>
+            !(
+              filters[8].checked &&
+              item.type.includes(filters[8].type.toLowerCase())
+            )
+        )
+        .map((point) => {
           const marker = document.createElement("div");
           marker.className = "markerMap";
           marker.addEventListener("click", function () {
@@ -77,25 +146,30 @@ class Map extends Component {
               zoom: 10.5,
               speed: 1.1,
             });
-            setSelectedMarker(index);
+            setSelectedMarker(point);
           });
           const mark = new mapboxgl.Marker({ element: marker })
             .setLngLat([point.longitude, point.latitude])
             .addTo(map);
-            displayMarker.push(mark);
+          displayMarker.push(mark);
         });
     } else if (this.props.drawMarker.length === 0) {
       displayMarker.map((item) => {
         item.remove();
       });
     }
-    if (this.props.capital.length !== prevProps.capital.length) {
+    if (
+      (drawAgri !== prevProps.drawAgri && drawAgri) ||
+      (this.props.firstGenerate && this.props.capital.length !== 0)
+    ) {
       this.props.capital.map((point) => {
         const markerWrapper = document.createElement("div");
         const marker = document.createElement("div");
-        const p = document.createElement('p');
+        const p = document.createElement("p");
         p.className = "markerMap2Text";
-        p.innerText = this.props.markers.filter((item) => Math.floor(item.zipcode / 1000) === point.dep).length;
+        p.innerText = this.props.markers.filter(
+          (item) => Math.floor(item.zipcode / 1000) === point.dep
+        ).length;
         markerWrapper.appendChild(marker);
         markerWrapper.appendChild(p);
         marker.className = "markerMap2";
@@ -108,15 +182,39 @@ class Map extends Component {
           setSelectedCapital(point);
         });
 
-        new mapboxgl.Marker({ element: markerWrapper })
+        const mark = new mapboxgl.Marker({ element: markerWrapper })
           .setLngLat([point.longitude, point.latitude])
           .addTo(map);
+        displayCurrent.push({ mark: mark, type: "agriculteur" });
       });
+      this.props.setFirstGenerate()
+    }
+    if (drawAch !== prevProps.drawAch && drawAch) {
+      this.props.markersAch.map((point) => {
+        const marker = document.createElement("div");
+        marker.className = "markerMapAcheteur";
+        marker.addEventListener("click", function () {
+          map.flyTo({
+            center: [point.longitude, point.latitude],
+            zoom: 10.5,
+            speed: 1.1,
+          });
+          setSelectedMarker(point);
+        });
+        const mark = new mapboxgl.Marker({ element: marker })
+          .setLngLat([point.longitude, point.latitude])
+          .addTo(map);
+        displayCurrent.push({ mark: mark, type: "acheteur" });
+      });
+    }
+    if (this.props.mapGenetate) {
+      setMapGenetate();
     }
   }
   render() {
-    const { selectedMarker, closedLocation, filters } = this.props;
-    console.log(selectedMarker);
+    const { selectedMarker, closedLocation, drawAch, drawAgri } = this.props;
+    console.log(drawAch, "acheteurs");
+    console.log(drawAgri, "agriculteurs");
     return (
       <>
         {selectedMarker && (
