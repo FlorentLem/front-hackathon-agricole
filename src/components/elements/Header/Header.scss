@@ -9,6 +9,8 @@
     -webkit-box-shadow: 8px 9px 32px -3px rgba(0, 0, 0, 0.29);
     -moz-box-shadow: 8px 9px 32px -3px rgba(0, 0, 0, 0.29);
     box-shadow: 8px 9px 32px -3px rgba(0, 0, 0, 0.29);
+    position: absolute;
+    z-index: 1000;
   }
 
   &__logo {
@@ -18,5 +20,14 @@
     width: 450px;
     height: 50px;
     margin: 0 0 0 15px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    &__logo {
+      width: 450px;
+      height: 30px;
+    }
   }
 }
