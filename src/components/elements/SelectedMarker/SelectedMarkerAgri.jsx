@@ -24,7 +24,7 @@ const SelectedMarkerAgri = ({ marker, closedLocation }) => {
       star: "⭐️☆☆☆",
     },
     {
-      name: "Intermédiaire",
+      name: "Amateur",
       valeur: 120,
       star: "⭐️⭐️☆☆",
     },
@@ -58,13 +58,19 @@ const SelectedMarkerAgri = ({ marker, closedLocation }) => {
   const rating = (data) => {
     console.log(agri);
     for (let i = 0; i <= rate.length - 1; i++) {
-      if (data.profil.somme >= rate[i].valeur) {
+      if (data.profil.somme <= rate[i].valeur) {
         setIsRated({
           name: rate[i].name,
           valeur: rate[i].valeur,
           star: rate[i].star,
         });
+        return;
       }
+      setIsRated({
+        name: rate[rate.length - 1].name,
+        valeur: rate[rate.length - 1].valeur,
+        star: rate[rate.length - 1].star,  
+      })
     }
   };
 
