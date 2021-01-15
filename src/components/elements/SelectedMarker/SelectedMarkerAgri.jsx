@@ -8,7 +8,6 @@ import "./SelectedMarker.scss";
 const SelectedMarkerAgri = ({ marker, closedLocation }) => {
   const [agriTab, setAgriTab] = useState({});
   const [somme, setSomme] = useState("");
-  const [transSomme, setTransSomme] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isRated, setIsRated] = useState([{ name: "", valeur: 0, star: "" }]);
 
