@@ -66,6 +66,7 @@
     height: 45px;
     border-radius: 50%;
     cursor: pointer;
+    outline-width: 0;
   }
   &__main {
     display: flex;
@@ -73,8 +74,32 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    height: 100%;
   }
+
+  &__titleCereales {
+    font-size: 26px;
+    margin-bottom: 45px;
+    font-weight: 500;
+  }
+
+  &__cereales {
+    margin-bottom: 50px;
+  }
+
+  &__cerealesCategory {
+    font-weight: 700;
+  }
+
+  &__about {
+    padding: 35px 25px 35px 25px;
+    margin: 20px;
+    background-color: rgba(255, 255, 255, 0.562);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    border-radius: 20px;
+    width: 96%;
+  }
+
   &__mainFirst {
     display: flex;
     padding: 35px 25px 35px 25px;
@@ -119,30 +144,27 @@
     flex-direction: column;
     justify-content: space-evenly;
   }
-  
-  &__buttonAccess {
-    color: white;
-    border: none;
-    height: 50px;
-    width: 230px;
-    font-size: 22px;
-    background-color: #5a9449;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 15px;
-    cursor: pointer;
-    outline-width: 0;
-    i {
-      margin-top: 5px;
-    }
-  }
   &__rateMobile {
     display: none;
   }
   &__dateMobile {
     display: none;
+  }
+  &__headAch {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      border-radius: 20px;
+      background-color: #565656;
+  
+      h2 {
+        color: white;
+        font-size: 34px;
+        font-weight: 500;
+        margin-top: 10px;
+      }
   }
 }
 
@@ -154,14 +176,14 @@
       left: 0;
       width: 100%;
       margin: 0;
+      height: 60vh;
     }
     &__head {
       background-color: transparent;
       align-items: flex-start;
-
       h2 {
-        color: #5a9449;
         padding: 10px 0 0 30px;
+        color: #5a9449;
       }
     }
     &__img {
@@ -182,5 +204,66 @@
     &__dateMobile {
       display: flex;
     }
+    &__headAch {
+      background-color: transparent;
+      align-items: flex-start;
+      h2 {
+        padding: 10px 0 0 30px;
+        color: #565656;
+      }
+    }
   }
 }
+
+// animation
+
+.containerLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.LoaderBalls {
+  width: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__item {
+    // .LoaderBalls__wrapper__item
+    $anim-drt: 0.4s;
+    $anim-ease: cubic-bezier(0.6, 0.05, 0.15, 0.95);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #5a9449;
+
+    &:nth-child(1) {
+      animation: bouncing $anim-drt alternate infinite $anim-ease;
+    }
+
+    &:nth-child(2) {
+      animation: bouncing $anim-drt $anim-drt/4 alternate infinite $anim-ease
+        backwards;
+    }
+
+    &:nth-child(3) {
+      animation: bouncing $anim-drt $anim-drt/2 alternate infinite $anim-ease
+        backwards;
+    }
+  }
+}
+
+@keyframes bouncing {
+  0% {
+    transform: translate3d(0, 10px, 0) scale(1.2, 0.85);
+  }
+
+  100% {
+    transform: translate3d(0, -20px, 0) scale(0.9, 1.1);
+  }
+}
+
+
+
