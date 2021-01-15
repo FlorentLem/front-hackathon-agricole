@@ -76,7 +76,8 @@ const SelectedMarkerAgri = ({ marker, closedLocation }) => {
       setIsRated({
         name: rate[rate.length - 1].name,
         valeur: rate[rate.length - 1].valeur,
-        star: rate[rate.length - 1].star,  
+        star: rate[rate.length - 1].star,
+        mobile: rate[rate.length - 1].mobile,  
       })
     }
   };
