@@ -1,14 +1,19 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from "./components/pages/Home/Home";
+
+import Map from './components/pages/Map/data';
+import Header from './components/elements/Header/Header';
 
 const App = () => {
   return (
-    <Router>
-      <Switch>
-        <Route to="/" component={Home} />
-      </Switch>
-    </Router>
+    <>
+      <Header />
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Map} />
+        </Switch>
+      </Router>
+    </>
   );
-}
+};
 
 export default App;
